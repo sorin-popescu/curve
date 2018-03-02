@@ -7,5 +7,6 @@ bin/
 build/
 .php_cs.cache
 .php_cs
-coverage.xml
+coverage
 phpunit.xml
+.data

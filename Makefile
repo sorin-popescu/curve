@@ -7,7 +7,7 @@ WHITE  := $(shell tput -Txterm setaf 7)
 YELLOW := $(shell tput -Txterm setaf 3)
 RESET  := $(shell tput -Txterm sgr0)
 
-test: lint phpcs phpunit phpstan phpmd
+test: lint phpcs phpunit phpstan
 
 install:
 	composer install --prefer-dist --no-interaction --no-suggest
@@ -16,11 +16,6 @@ install:
 phpunit:
 	@echo "${GREEN}Unit tests${RESET}"
 	@php bin/phpunit
-
-## Run PHP mess detector
-phpmd:
-	@echo "${GREEN}PHP Mess Detector${RESET}"
-	@php bin/phpmd src/ text cleancode,codesize,naming,design,controversial,unusedcode
 
 ## Run PHP code sniffer
 phpcs:
@@ -41,14 +36,10 @@ lint:
 fix:
 	@php bin/php-cs-fixer --no-interaction fix
 
-## Generate the public API docs
-docs:
-	@echo "Nothing here"
-
 ## Test Coverage HTML
 coverage:
 	@echo "${GREEN}Tests with coverage${RESET}"
-	@phpdbg -qrr bin/phpunit --coverage-html build/ --coverage-clover coverage.xml
+	@php bin/phpunit --coverage-html ./coverage
 
 ## Prints this help
 help:
