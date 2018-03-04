@@ -17,7 +17,7 @@ class DefaultController
 
     public function emit(Request $request, Response $response, array $args)
     {
-        $prepaidCard = $this->service->openAccount('GBP');
+        $prepaidCard = $this->service->emitCard('GBP');
 
         return $response->withJson(["card" => $prepaidCard->getNumber()], 201);
     }

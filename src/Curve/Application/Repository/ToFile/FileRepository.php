@@ -23,8 +23,8 @@ class FileRepository implements PrepaidCardRepository
     public function getByCardNumber(CardNumber $currentAccountNumber)
     {
         $content = file_get_contents($this->fileName);
-        $account = unserialize($content);
+        $prepaidCard = unserialize($content);
 
-        return $account;
+        return $prepaidCard;
     }
 }

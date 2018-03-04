@@ -43,14 +43,6 @@ class Money
     }
 
     /**
-     * @return string
-     */
-    public function getMoney()
-    {
-        return sprintf("%s%01.2f", $this->currency, $this->amount);
-    }
-
-    /**
      * @param Money $other
      * @return Money
      */

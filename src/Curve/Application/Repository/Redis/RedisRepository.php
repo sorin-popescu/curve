@@ -28,8 +28,8 @@ class RedisRepository implements PrepaidCardRepository
     public function getByCardNumber(CardNumber $cardNumber)
     {
         $key = sprintf("%s", $cardNumber->getNumber());
-        $account = $this->client->get($key);
+        $prepaidCard = $this->client->get($key);
 
-        return unserialize($account);
+        return unserialize($prepaidCard);
     }
 }

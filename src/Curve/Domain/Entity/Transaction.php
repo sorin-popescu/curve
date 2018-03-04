@@ -79,10 +79,6 @@ class Transaction
         }
 
         $this->amount = $this->amount->deduct($money);
-
-        if ($this->amount->isEqual($this->capturedAmount)) {
-            $this->status = TransactionStatus::captured();
-        }
     }
 
     /**

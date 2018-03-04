@@ -27,7 +27,7 @@ class PrepaidCardService
      * @param string $currency
      * @return PrepaidCard
      */
-    public function openAccount(string $currency): PrepaidCard
+    public function emitCard(string $currency): PrepaidCard
     {
         $prepaidCard = PrepaidCard::emit(new Currency($currency));
         $this->repository->save($prepaidCard);
@@ -65,20 +65,6 @@ class PrepaidCardService
 
     /**
      * @param int $cardNumber
-     */
-    public function transactions(int $cardNumber)
-    {
-        $cardNumber = CardNumber::fromString($cardNumber);
-
-        /** @var PrepaidCard $prepaidCard */
-        $prepaidCard = $this->repository->getByCardNumber($cardNumber);
-        $prepaidCard->close();
-
-        $this->repository->save($prepaidCard);
-    }
-
-    /**
-     * @param int $cardNumber
      * @return PrepaidCard
      */
     public function displayBalance(int $cardNumber): PrepaidCard
@@ -92,9 +78,9 @@ class PrepaidCardService
 
     /**
      * @param int $cardNumber
-     * @param float $amount
+     * @param int $amount
      */
-    public function makeDeposit(int $cardNumber, float $amount)
+    public function makeDeposit(int $cardNumber, int $amount)
     {
         $cardNumber = CardNumber::fromString($cardNumber);
 
@@ -110,35 +96,33 @@ class PrepaidCardService
     /**
      * @param string $merchant
      * @param int $cardNumber
-     * @param float $amount
+     * @param int $amount
      * @param string $date
      * @return Transaction
      */
-    public function makeAuthorizationRequest(string $merchant, int $cardNumber, float $amount, string $date)
+    public function makeAuthorizationRequest(string $merchant, int $cardNumber, int $amount, string $date)
     {
         $cardNumber = CardNumber::fromString($cardNumber);
 
-        $transaction = new Transaction(
+        /** @var PrepaidCard $prepaidCard */
+        $prepaidCard = $this->repository->getByCardNumber($cardNumber);
+        $transactionId = $prepaidCard->autorizationRequest(
             $merchant,
             new Money($amount, new Currency('GBP')),
             new \DateTimeImmutable($date)
         );
 
-        /** @var PrepaidCard $prepaidCard */
-        $prepaidCard = $this->repository->getByCardNumber($cardNumber);
-        $prepaidCard->autorizationRequest($transaction);
-
         $this->repository->save($prepaidCard);
 
-        return $transaction;
+        return $transactionId;
     }
 
     /**
      * @param int $cardNumber
      * @param int $transactionId
-     * @param float $amount
+     * @param int $amount
      */
-    public function makeCapture(int $cardNumber, int $transactionId, float $amount)
+    public function makeCapture(int $cardNumber, int $transactionId, int $amount)
     {
         $cardNumber = CardNumber::fromString($cardNumber);
 
@@ -154,9 +138,9 @@ class PrepaidCardService
     /**
      * @param int $cardNumber
      * @param int $transactionId
-     * @param float $amount
+     * @param int $amount
      */
-    public function makeReverse(int $cardNumber, int $transactionId, float $amount)
+    public function makeReverse(int $cardNumber, int $transactionId, int $amount)
     {
         $cardNumber = CardNumber::fromString($cardNumber);
 
@@ -172,9 +156,9 @@ class PrepaidCardService
     /**
      * @param int $cardNumber
      * @param int $transactionId
-     * @param float $amount
+     * @param int $amount
      */
-    public function makeRefund(int $cardNumber, int $transactionId, float $amount)
+    public function makeRefund(int $cardNumber, int $transactionId, int $amount)
     {
         $cardNumber = CardNumber::fromString($cardNumber);
 

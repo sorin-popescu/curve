@@ -9,6 +9,7 @@ use Curve\Domain\ValueObject\CardNumber;
 use Curve\Domain\ValueObject\CardStatus;
 use Curve\Domain\ValueObject\Currency;
 use Curve\Domain\ValueObject\Money;
+use DateTimeImmutable;
 
 class PrepaidCard
 {
@@ -84,20 +85,28 @@ class PrepaidCard
     }
 
     /**
-     * @param Transaction $transaction
+     * @param string $merchant
+     * @param Money $amount
+     * @param DateTimeImmutable $date
+     * @return int
      */
-    public function autorizationRequest(Transaction $transaction)
+    public function autorizationRequest(string $merchant, Money $amount, DateTimeImmutable $date)
     {
         if ($this->status->isLocked()) {
-            $transaction->decline();
             throw new CardLockedException();
         }
+
+        $transaction = new Transaction($merchant, $amount, $date);
         if ($transaction->amount()->isMoreThan($this->availableBalance)) {
             $transaction->decline();
             throw new InsufficientFundsException();
         }
+
         $this->authorizationRequests[$transaction->getId()] = $transaction;
         $this->availableBalance = $this->availableBalance->deduct($transaction->amount());
+        $transaction->authorize();
+
+        return $transaction->getId();
     }
 
     /**
@@ -141,15 +150,6 @@ class PrepaidCard
         $this->balance = $this->balance->add($money);
     }
 
-    public function currency(): Currency
-    {
-        if ($this->status->isLocked()) {
-            throw new CardLockedException();
-        }
-
-        return $this->currency;
-    }
-
     /**
      * @return int
      */
@@ -163,25 +163,7 @@ class PrepaidCard
      */
     public function availableBalance(): int
     {
-        if ($this->status->isLocked()) {
-            throw new CardLockedException();
-        }
-
         return $this->availableBalance->getAmount();
-    }
-
-    /**
-     * @return string
-     */
-    public function displayBalance(): string
-    {
-        return sprintf(
-            'Balance: %s%01.2f Available balance: %s%01.2f',
-            $this->currency,
-            $this->balance(),
-            $this->currency,
-            $this->availableBalance()
-        );
     }
 
     public function getNumber()
