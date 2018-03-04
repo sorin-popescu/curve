@@ -1,0 +1,271 @@
+{
+	"info": {
+		"name": "Curve",
+		"_postman_id": "b22a2ca6-6e5b-a96b-1100-18cf0bfc7817",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Balance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"card_number\": 155297,\n\t\"amount\": 100\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/155297",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"155297"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Emit card",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/card",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Deposit ",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"card_number\": 155297,\n\t\"amount\": 100\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/deposit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"deposit"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Authorize request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"merchant\": \"Coffee shop\",\n\t\"card_number\": 155297,\n\t\"amount\": 100,\n\t\"date\": \"2018-02-24\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/authorize",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"authorize"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Reverse request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"card_number\": 155297,\n\t\"amount\": 100,\n\t\"transaction_id\": 6795\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/reverse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"reverse"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Refund request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"card_number\": 155297,\n\t\"amount\": 100,\n\t\"transaction_id\": 1912\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/refund",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"refund"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Capture request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"card_number\": 155297,\n\t\"amount\": 100,\n\t\"transaction_id\": 1912\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/refund",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"refund"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Lock Card",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"card_number\": 155297\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/lock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"lock"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Unlock Card",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"card_number\": 155297\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/unlock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"unlock"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

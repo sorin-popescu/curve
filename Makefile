@@ -9,6 +9,11 @@ RESET  := $(shell tput -Txterm sgr0)
 
 test: lint phpcs phpunit phpstan
 
+deploy: up install
+
+up:
+	docker-compose up -d
+
 install:
 	composer install --prefer-dist --no-interaction --no-suggest
 
