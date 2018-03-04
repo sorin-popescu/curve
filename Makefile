@@ -9,6 +9,11 @@ RESET  := $(shell tput -Txterm sgr0)
 
 test: lint phpcs phpunit phpstan
 
+deploy: up install
+
+up:
+	docker-compose up -d
+
 install:
 	composer install --prefer-dist --no-interaction --no-suggest
 
@@ -39,7 +44,7 @@ fix:
 ## Test Coverage HTML
 coverage:
 	@echo "${GREEN}Tests with coverage${RESET}"
-	@php bin/phpunit --coverage-html ./coverage
+	@php bin/phpunit --coverage-clover=coverage.xml
 
 ## Prints this help
 help:

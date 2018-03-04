@@ -99,7 +99,6 @@ class PrepaidCardServiceTest extends \PHPUnit_Framework_TestCase
         $service->makeDeposit($prepaidCard->getNumber(), 100);
 
         $this->assertNotNull($service->makeAuthorizationRequest('Coffee shop', $prepaidCard->getNumber(), 100, '2018-01-01'));
-
     }
 
     /** @test */
