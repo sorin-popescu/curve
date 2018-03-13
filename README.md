@@ -1,3 +1,7 @@
+[![StyleCI](https://styleci.io/repos/123552459/shield?style=flat-square&branch=master)](https://styleci.io/repos/123552459)
+[![Travis](https://img.shields.io/travis/sorin-popescu/curve.svg?style=flat-square&label=TravisCI)](https://github.com/sorin-popescu/curve)
+[![Code Coverage](https://img.shields.io/codecov/c/github/sorin-popescu/curve.svg?style=flat-square&label=Coverage)](https://codecov.io/gh/sorin-popescu/curve)
+
 # Prepaid Card
 
 ## Dependencies
@@ -75,4 +79,3 @@ make lint
 ```
 make coverage
 ```
-# {{project}}
