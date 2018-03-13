@@ -62,8 +62,8 @@ class DefaultController
 
     public function deposit(Request $request, Response $response, array $args)
     {
-        $cardNumber = $request->getParam('card_number');
-        $amount = $request->getParam('amount');
+        $cardNumber = (int) $request->getParam('card_number');
+        $amount = (int) $request->getParam('amount');
 
         try {
             $this->service->makeDeposit($cardNumber, $amount);

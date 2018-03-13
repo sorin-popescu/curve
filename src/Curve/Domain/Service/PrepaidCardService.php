@@ -40,7 +40,7 @@ class PrepaidCardService
      */
     public function lockCard(int $cardNumber)
     {
-        $cardNumber = CardNumber::fromString($cardNumber);
+        $cardNumber = CardNumber::fromInt($cardNumber);
 
         /** @var PrepaidCard $prepaidCard */
         $prepaidCard = $this->repository->getByCardNumber($cardNumber);
@@ -54,7 +54,7 @@ class PrepaidCardService
      */
     public function unlockCard(int $cardNumber)
     {
-        $cardNumber = CardNumber::fromString($cardNumber);
+        $cardNumber = CardNumber::fromInt($cardNumber);
 
         /** @var PrepaidCard $prepaidCard */
         $prepaidCard = $this->repository->getByCardNumber($cardNumber);
@@ -69,7 +69,7 @@ class PrepaidCardService
      */
     public function displayBalance(int $cardNumber): PrepaidCard
     {
-        $cardNumber = CardNumber::fromString($cardNumber);
+        $cardNumber = CardNumber::fromInt($cardNumber);
 
         $prepaidCard = $this->repository->getByCardNumber($cardNumber);
 
@@ -82,7 +82,7 @@ class PrepaidCardService
      */
     public function makeDeposit(int $cardNumber, int $amount)
     {
-        $cardNumber = CardNumber::fromString($cardNumber);
+        $cardNumber = CardNumber::fromInt($cardNumber);
 
         $money = new Money($amount, new Currency('GBP'));
 
@@ -98,11 +98,11 @@ class PrepaidCardService
      * @param int $cardNumber
      * @param int $amount
      * @param string $date
-     * @return Transaction
+     * @return int
      */
-    public function makeAuthorizationRequest(string $merchant, int $cardNumber, int $amount, string $date)
+    public function makeAuthorizationRequest(string $merchant, int $cardNumber, int $amount, string $date): int
     {
-        $cardNumber = CardNumber::fromString($cardNumber);
+        $cardNumber = CardNumber::fromInt($cardNumber);
 
         /** @var PrepaidCard $prepaidCard */
         $prepaidCard = $this->repository->getByCardNumber($cardNumber);
@@ -124,7 +124,7 @@ class PrepaidCardService
      */
     public function makeCapture(int $cardNumber, int $transactionId, int $amount)
     {
-        $cardNumber = CardNumber::fromString($cardNumber);
+        $cardNumber = CardNumber::fromInt($cardNumber);
 
         $money = new Money($amount, new Currency('GBP'));
 
@@ -142,7 +142,7 @@ class PrepaidCardService
      */
     public function makeReverse(int $cardNumber, int $transactionId, int $amount)
     {
-        $cardNumber = CardNumber::fromString($cardNumber);
+        $cardNumber = CardNumber::fromInt($cardNumber);
 
         $money = new Money($amount, new Currency('GBP'));
 
@@ -160,7 +160,7 @@ class PrepaidCardService
      */
     public function makeRefund(int $cardNumber, int $transactionId, int $amount)
     {
-        $cardNumber = CardNumber::fromString($cardNumber);
+        $cardNumber = CardNumber::fromInt($cardNumber);
 
         $money = new Money($amount, new Currency('GBP'));
 

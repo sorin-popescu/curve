@@ -7,12 +7,12 @@ WHITE  := $(shell tput -Txterm setaf 7)
 YELLOW := $(shell tput -Txterm setaf 3)
 RESET  := $(shell tput -Txterm sgr0)
 
-test: lint phpcs phpunit phpstan
+test: lint phpcs phpunit behat phpstan
 
 deploy: up install
 
 up:
-	docker-compose up -d
+	docker-compose up
 
 install:
 	composer install --prefer-dist --no-interaction --no-suggest
@@ -21,6 +21,11 @@ install:
 phpunit:
 	@echo "${GREEN}Unit tests${RESET}"
 	@php bin/phpunit
+
+## Run Behat tests
+behat:
+	@echo "${GREEN}Behat tests${RESET}"
+	@php bin/behat
 
 ## Run PHP code sniffer
 phpcs:

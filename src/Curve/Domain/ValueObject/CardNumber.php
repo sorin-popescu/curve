@@ -29,10 +29,10 @@ class CardNumber
     }
 
     /**
-     * @param string $number
+     * @param int $number
      * @return CardNumber
      */
-    public static function fromString(string $number)
+    public static function fromInt(int $number)
     {
         return new self($number);
     }

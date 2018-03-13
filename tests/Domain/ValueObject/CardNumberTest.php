@@ -10,7 +10,7 @@ class CardNumberTest extends \PHPUnit_Framework_TestCase
     {
         $number = 999999;
 
-        $cardNumber = CardNumber::fromString($number);
+        $cardNumber = CardNumber::fromInt($number);
         $this->assertEquals($cardNumber->getNumber(), $number);
     }
 }

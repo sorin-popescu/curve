@@ -13,6 +13,7 @@ install:
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
 
 script:
+  - make tests
   - make lint
   - make phpcs
   - make phpstan
